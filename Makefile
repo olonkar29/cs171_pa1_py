@@ -11,3 +11,9 @@ client2:
 
 client3:
 	python3 -u client3.py
+
+test:
+	python3 -u sha_test.py
+
+transaction:
+	python3 -u transaction.py
