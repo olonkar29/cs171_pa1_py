@@ -151,7 +151,7 @@ class Block:
         return self.hash + self.transaction.getSender() + self.transaction.getReceiver() + "$" + str(self.transaction.getAmount())
 
     def toString_forChain(self):
-        return "(" + self.transaction.getSender() + "," + self.transaction.getReceiver() + ",$" + str(self.transaction.getAmount()) +"," + self.hash + ")"
+        return "(" + self.transaction.getSender() + ", " + self.transaction.getReceiver() + ", $" + str(self.transaction.getAmount()) +", " + self.hash + ")"
 
     def setHash(self, hash):
         self.hash = hash
@@ -206,7 +206,7 @@ class Blockchain:
         for i in range(self.num_transactions):
             out+=(self.chain[i].toString_forChain())
             if(i<self.num_transactions-1):
-                out+=","
+                out+=", "
         out += "]"
         print(out)
     

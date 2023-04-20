@@ -48,7 +48,7 @@ class Block:
         return self.hash + self.transaction.getSender() + self.transaction.getReceiver() + "$" + str(self.transaction.getAmount())
 
     def toString_forChain(self):
-        return "(" + self.transaction.getSender() + "," + self.transaction.getReceiver() + ",$" + str(self.transaction.getAmount()) +"," + self.hash + ")"
+        return "(" + self.transaction.getSender() + ", " + self.transaction.getReceiver() + ", $" + str(self.transaction.getAmount()) +", " + self.hash + ")"
 
     def setHash(self, hash):
         self.hash = hash
