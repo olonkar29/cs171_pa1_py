@@ -1,10 +1,10 @@
-# client.py
+# clien2.py
 # this process only connects to a predefined server
 # it sends any input it receives from the user to the server
 # and echoes any message it receives from the server to console
 import socket
 import threading
-
+import sys
 from os import _exit
 from sys import stdout
 from time import sleep
@@ -14,15 +14,17 @@ def get_user_input():
 	while True:
 		# wait for user input
 		user_input = input()
-		if user_input == "":
+		if user_input == "exit":
 			# close socket before exiting
 			out_sock.close()
-			print("exiting program")
+			# print("exiting program")
 			# flush console output buffer in case there are remaining prints
 			# that haven't actually been printed to console
 			stdout.flush() # imported from sys library
 			# exit program with status 0
 			_exit(0) # imported from os library
+		elif user_input[0:4] == "wait":
+			sleep(int(user_input[5:]))
 		else:
 			try:
 				# send user input string to server, converted into bytes
@@ -32,7 +34,7 @@ def get_user_input():
 				print("exception in sending to server")
 				continue
 				
-			print("sent latest input to server")
+			# print("sent latest input to server")
 
 # simulates network delay then handles received message
 def handle_msg(data):
@@ -43,7 +45,6 @@ def handle_msg(data):
 
 if __name__ == "__main__":
 	sleep(1)
-
 	# specify server's socket address so client can connect to it
 	# since client and server are just different processes on the same machine
 	# server's IP is just local machine's IP
@@ -56,7 +57,7 @@ if __name__ == "__main__":
 	# attempt to connect own socket to server's socket address
 	out_sock.connect((SERVER_IP, SERVER_PORT))
 	print("connected to server")
-
+	out_sock.sendall(bytes("Hello 2", "utf-8"))
 	# spawn new thread to keep waiting for user inputs
 	# so user input and socket receive do not block each other
 	threading.Thread(target=get_user_input).start()
@@ -76,7 +77,8 @@ if __name__ == "__main__":
 		if not data:
 			# close own socket since other end is closed
 			out_sock.close()
-			print("connection closed from server")
+			# print("connection closed from server")
+			_exit(0)
 			break
 
 		# spawn a new thread to handle message 

@@ -66,6 +66,7 @@ class Block:
             else:
                 self.nonce+=1
         # print(h)
+        # print(self.nonce)
     
     def getHash(self):
         return self.hash
@@ -87,16 +88,12 @@ class Blockchain:
     
     def addBlock(self, block):
         if (self.num_transactions == 0) :
-            block.setHash(("0"*256))
-            block.setNonce()
             block.setHash(("0"*64))
         else:
             prev_block = self.chain[self.num_transactions - 1].toString()
             # print(prev_block)
-            block.setHash(hex_to_binary(sha256(prev_block, "hex")))
-            block.setNonce()
             block.setHash(sha256(prev_block, "hex"))
-        
+        block.setNonce()
         block.setPointer(self.num_transactions-1)
         self.chain.append(block)
         self.num_transactions+=1
@@ -128,10 +125,12 @@ class Blockchain:
         balance.append(self.calc_balance("P3"))
         print('P1: $%d, P2: $%d, P3: $%d'%(balance[0],balance[1],balance[2]))
     
+
+    
 if __name__ == "__main__":
     # t = Transaction("P1", "P3", 3)
 
-    b = Block("P1", "P3", 3)
+    b = Block("P1", "P2", 1)
     c = Blockchain()
     c.addBlock(b)
     c.printBlockchain()
