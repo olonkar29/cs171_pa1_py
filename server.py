@@ -19,7 +19,7 @@ def get_user_input():
 		elif user_input=="Balance":
 			b.calc_all_balance()
 		elif user_input[0:3] == "wai":
-			print(f"waiting {user_input[5:]} seconds",flush=True)
+			# print(f"waiting {user_input[5:]} seconds",flush=True)
 			sleep(int(user_input[5:]))
 		elif user_input =="exit":
 			# close all sockets before exiting
@@ -77,7 +77,7 @@ def handle_msg(data, addr, conn):
 
 # handle a new connection by waiting to receive from connection
 def respond(conn, addr):
-	print(f"accepted connection from port {addr[1]}", flush=True)
+	# print(f"accepted connection from port {addr[1]}", flush=True)
 
 	# infinite loop to keep waiting to receive new data from this client
 	while True:
@@ -94,7 +94,7 @@ def respond(conn, addr):
 		if not data:
 			# close own socket to client since other end is closed
 			conn.close()
-			print(f"connection closed from {addr[1]}", flush=True)
+			# print(f"connection closed from {addr[1]}", flush=True)
 			break
 
 		# spawn a new thread to handle message 

@@ -56,7 +56,7 @@ if __name__ == "__main__":
 	out_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	# attempt to connect own socket to server's socket address
 	out_sock.connect((SERVER_IP, SERVER_PORT))
-	print("connected to server")
+	# print("connected to server")
 	out_sock.sendall(bytes("Hello 1", "utf-8"))
 	# spawn new thread to keep waiting for user inputs
 	# so user input and socket receive do not block each other
