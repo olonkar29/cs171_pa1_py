@@ -46,7 +46,7 @@ def handle_msg(data, addr, conn):
 			client_order.append(int(data[6]))
 		elif data[0:3] == "Bal":
 			balance = b.calc_balance(data[8:])
-			conn.sendall(bytes(f"${balance}","utf-8"))
+			conn.sendall(bytes(f"Balance: ${balance}","utf-8"))
 		elif data[0:3] == "Tra":
 			index = 0
 			for i in range(len(client_order)):
