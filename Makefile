@@ -17,3 +17,6 @@ test:
 
 transaction:
 	python3 -u transaction.py
+
+nonce:
+	python3 -u nonce.py

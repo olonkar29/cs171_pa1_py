@@ -9,22 +9,22 @@ from os import _exit
 from sys import stdout
 from time import sleep
 
-# terminate program upon any user input
 def get_user_input():
-	user_input = input()
-	if user_input!="":
-		print(user_input)
-	else:
-		# close all sockets before exiting
-		in_sock.close()
-		for sock in out_socks:
-			sock[0].close()
-		print("exiting program", flush=True)
-		# flush console output buffer in case there are remaining prints
-		# that haven't actually been printed to console
-		stdout.flush() # imported from sys library
-		# exit program with status 0
-		_exit(0) # imported from os library
+	while True:
+		user_input = input()
+		if user_input!="":
+			print(user_input)
+		else:
+			# close all sockets before exiting
+			in_sock.close()
+			for sock in out_socks:
+				sock[0].close()
+			print("exiting program", flush=True)
+			# flush console output buffer in case there are remaining prints
+			# that haven't actually been printed to console
+			stdout.flush() # imported from sys library
+			# exit program with status 0
+			_exit(0) # imported from os library
 
 # simulates network delay then handles received message
 def handle_msg(data, addr, conn):
@@ -83,7 +83,7 @@ if __name__ == "__main__":
 	# programatically get local machine's IP
 	IP = socket.gethostname()
 	# port 3000-49151 are generally usable
-	PORT = 9000
+	PORT = 8080
 
 	# create a socket object, SOCK_STREAM specifies a TCP socket
 	in_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

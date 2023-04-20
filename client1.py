@@ -42,11 +42,12 @@ def handle_msg(data):
 	print(data)
 
 if __name__ == "__main__":
+	sleep(1)
 	# specify server's socket address so client can connect to it
 	# since client and server are just different processes on the same machine
 	# server's IP is just local machine's IP
 	SERVER_IP = socket.gethostname()
-	SERVER_PORT = 9000
+	SERVER_PORT = 8080
 
 	# create a socket object, SOCK_STREAM specifies a TCP socket
 	# do not need to specify address for own socket for making an outbound connection
